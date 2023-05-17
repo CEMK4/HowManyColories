@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HowManyColories.Areas.Identity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("HowManyColoriesContextConnection") ?? throw new InvalidOperationException("Connection string 'HowManyColoriesContextConnection' not found.");
 
@@ -10,8 +11,6 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddCoreAdmin();
 
 var app = builder.Build();
 

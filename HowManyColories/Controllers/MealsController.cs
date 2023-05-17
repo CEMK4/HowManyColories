@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HowManyColories.Areas.Identity.Data;
 using HowManyColories.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace HowManyColories.Controllers
 {
     public class MealsController : Controller
     {
         private readonly HowManyColoriesContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public MealsController(HowManyColoriesContext context)
+        public MealsController(HowManyColoriesContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Meals
@@ -56,10 +59,14 @@ namespace HowManyColories.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MealTime")] Meal meal)
+        public async Task<IActionResult> Create([Bind("Id,MealTime,Products")] Meal meal)
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User);
+                var user = await _userManager.FindByIdAsync(userId);
+
+                meal.User = user;
                 _context.Add(meal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

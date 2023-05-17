@@ -7,8 +7,8 @@ namespace HowManyColories.Models
         public int Id { get; set; }        
         public DateTime MealTime { get; set; }
               
-        public virtual ICollection<Product> Products { get; set; }
-
+        public virtual List<Product> Products { get; set; }
+        
         public virtual User User { get; set; }
     }
 }

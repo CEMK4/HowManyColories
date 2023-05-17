@@ -6,7 +6,20 @@
 }
 
 <h1>Create</h1>
+@foreach (var value in ViewData.ModelState.Values)
+{
+    if (value.Errors.Count > 0)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in value.Errors)
+            {
+                <span>@error.ErrorMessage</span>
 
+                <br />
+            }
+        </div>
+    }
+}
 <h4>Product</h4>
 <hr />
 <div class="row">
@@ -44,7 +57,7 @@
                 <span asp-validation-for="Fats" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-outline-light" />
             </div>
         </form>
     </div>
