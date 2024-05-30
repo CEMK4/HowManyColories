@@ -52,4 +52,13 @@ public class ProductItem {
     @Column(name = "carbs")
     @JdbcTypeCode(SqlTypes.DOUBLE)
     private Double carbs;
+
+
+    public ProductItem(String title, Double calories, Double fats, Double proteins, Double carbs) {
+        this.title = title;
+        this.calories = calories;
+        this.fats = fats;
+        this.proteins = proteins;
+        this.carbs = carbs;
+    }
 }

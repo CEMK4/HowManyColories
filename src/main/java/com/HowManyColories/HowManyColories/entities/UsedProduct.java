@@ -22,16 +22,20 @@ public class UsedProduct {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "meal_id")
-    private Meal meal;
-
     @NotBlank
     @NotEmpty
     @NotNull
     @Column(name = "measure")
     @JdbcTypeCode(SqlTypes.DOUBLE)
     private String measure;
+
+    @ToString.Exclude
+    @OneToOne
+    @JoinColumn(name = "product_item_id")
+    private ProductItem productItem;
+
+    @ManyToOne
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
 
 }

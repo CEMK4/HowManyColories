@@ -1,6 +1,7 @@
 package com.HowManyColories.HowManyColories.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -34,5 +35,12 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "productItems_id"))
     private Set<ProductItem> productItems = new LinkedHashSet<>();
+
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    @Column(name = "title")
+    @JdbcTypeCode(SqlTypes.NVARCHAR)
+    private String title;
 
 }
